@@ -4,7 +4,7 @@ import App from './App.jsx'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import HomePage from './pages/home.jsx'
-// import OtherPage from './pages/CheckoutPage.jsx'
+import LoginPage from './pages/login.jsx'
 
 const router = createBrowserRouter([
   {
@@ -13,16 +13,17 @@ const router = createBrowserRouter([
     errorElement: <h1 className='errorMessage'>Something Went Wrong!</h1>,
     children: [
       {
-        index: true,
+        path:'/home',
         element: <HomePage />
-      }, /*{
-        path: '/other',
-        element: <OtherPage />
-      } */
+      }, {
+        path: '/login',
+        element: <LoginPage />
+      } 
     ]
   }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <RouterProvider router={router} />
+ // <RouterProvider router={router} />
+ <App />
 )
