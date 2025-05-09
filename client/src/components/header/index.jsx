@@ -39,6 +39,8 @@ class Header extends Component {
   getTitle = () => {
     // 得到当前请求路径
     const path = this.props.location.pathname
+  //  console.log("getTitle:path")
+  // console.log(path)
     let title
     menuList.forEach(item => {
       if (item.key===path) { // 如果当前item对象的key与path一样,item的title就是需要显示的title
@@ -68,9 +70,10 @@ class Header extends Component {
         // 删除保存的user数据
         storageUtils.removeUser()
         memoryUtils.user = {}
-
+        console.log("onOK:props")
+        console.log(this.props)
         // 跳转到login
-        this.props.history.replace('/login')
+        this.props.location.replace('/login')
       }
     })
   }
@@ -114,14 +117,14 @@ class Header extends Component {
           <span>欢迎, {username}</span>
           <LinkButton onClick={this.logout}>退出</LinkButton>
         </div>
-  {/*      <div className="header-bottom">
+        <div className="header-bottom">
           <div className="header-bottom-left">{title}</div>
           <div className="header-bottom-right">
             <span>{currentTime}</span>
             <img src={dayPictureUrl} alt="weather"/>
             <span>{weather}</span>
           </div>
-        </div>*/}
+        </div>
       </div>
     )
   }

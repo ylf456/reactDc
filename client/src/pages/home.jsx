@@ -6,7 +6,9 @@ const { Footer, Sider, Content } = Layout
 import LeftNav from '../components/left-nav/index'
 import Header from '../components/header/index'
 import Category from '../pages/category/category'
+import Admin from '../pages/admin/index'
 
+// all the routes here instead of main/app routing
 export default function Home() {
  
   
@@ -22,9 +24,9 @@ export default function Home() {
             <Content style={{margin: 20, backgroundColor: '#fff'}}>
 
                 <Routes>
-                    {/* <Route from='/' exact to='/home'/>
+                     <Route from='/' exact to='/home'/>
 
-                    <Route path='/home' element={<Home/>}/> */}
+                    <Route path='/home' element={<Admin/>}/> 
                     <Route path='/category' element={<Category/>}/>
                  {/*    <Route path='/user' element={<User/>}/>
                     <Route path='/role' element={<Role/>}/>
