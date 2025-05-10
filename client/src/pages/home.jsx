@@ -17,6 +17,8 @@ import memoryUtils from '../utils/memoryUtils'
 // all the routes here instead of main/app routing
 export default function Home() {
   const user = memoryUtils.user;
+  console.log("memoryutils.user: ");
+  console.log(user);
   // 如果内存没有存储user ==> 当前没有登陆
   if (!user || !user._id) {
     // 自动跳转到登陆(在render()中)

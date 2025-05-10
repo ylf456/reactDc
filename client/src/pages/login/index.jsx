@@ -4,12 +4,13 @@ import logo from "../../assets/images/logo.png";
 // import custom helper functions to validate user input
 import { checkPassword } from "../../utils/loginValidate";
 import { reqLogin } from "../../api";
-import { Navigate , useNavigate } from "react-router-dom";
-import memoryUtils from '../../utils/memoryUtils'
+import { Navigate, useNavigate } from "react-router-dom";
+import memoryUtils from "../../utils/memoryUtils";
+import storageUtils from "../../utils/storageUtils";
 
 function Login() {
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
+  const [userName, setUserName] = useState("admin");
+  const [password, setPassword] = useState("admin");
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -44,8 +45,8 @@ function Login() {
         const user = result.data;
         memoryUtils.user = user; // 保存在内存中
         storageUtils.saveUser(user);
-        // go to home page
-        navigate('/')
+        // navigate to home page after successfully login
+        navigate("/");
       }
     } catch (err) {
       console.error(err);
@@ -58,6 +59,7 @@ function Login() {
   // 如果用户已经登陆, 自动跳转到管理界面  to <home/>
   const user = memoryUtils.user;
   if (user && user._id) {
+    // or navigate("/");
     return <Navigate to="/" />;
   }
 
