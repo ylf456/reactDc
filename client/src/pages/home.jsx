@@ -19,6 +19,7 @@ const USER_KEY = "user_key";
 // all the routes here instead of main/app routing
 export default function Home() {
    let user = memoryUtils.user;
+   
    if (!user._id) {
     // user = storageUtils.getUser();
     user = JSON.parse(localStorage.getItem(USER_KEY) || '{}' )

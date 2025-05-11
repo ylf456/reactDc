@@ -18,7 +18,7 @@ export default class Category extends React.Component {
     showStatus: 0, // 标识添加/更新的确认框是否显示, 0: 都不显示, 1: 显示添加, 2: 显示更新
   };
 
-  formRef = React.createRef();
+  form = React.createRef();
 
 
   /*
@@ -124,7 +124,7 @@ export default class Category extends React.Component {
    */
   handleCancel = () => {
     // 清除输入数据
-    this.form.resetFields();
+    this.form.current.resetFields();
     // 隐藏确认框
     this.setState({
       showStatus: 0,
@@ -148,10 +148,10 @@ export default class Category extends React.Component {
     console.log("addCategory this.props: ");
     console.log(this.props);
     console.log("addCategory this.formRef: ");
-    console.log(this.formRef);
+    console.log(this.form);
     
-    this.formRef.current.validateFields(async (err, values) => {
-      if (!err) {
+    this.form.current.validateFields().then(async (values) => {
+      
         // 隐藏确认框
         this.setState({
           showStatus: 0,
@@ -160,7 +160,7 @@ export default class Category extends React.Component {
         // 收集数据, 并提交添加分类的请求
         const { parentId, categoryName } = values;
         // 清除输入数据
-        this.formRef.resetFields();
+        this.form.current.resetFields();
         const result = await reqAddCategory(categoryName, parentId);
         if (result.status === 0) {
           // 添加的分类就是当前分类列表下的分类
@@ -172,7 +172,9 @@ export default class Category extends React.Component {
             this.getCategorys("0");
           }
         }
-      }
+      
+    }).catch((err) => {
+      console.log(err)
     });
   };
 
@@ -288,7 +290,7 @@ export default class Category extends React.Component {
             setForm={(form) => {
               this.form = form;
            }}
-            ref={this.formRef}
+            // ref={this.formRef}
           />
           </Form>
         </Modal>

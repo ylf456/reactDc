@@ -22,7 +22,7 @@ class AddForm extends Component {
   // };
 
   componentWillMount() {
-    this.props.setForm(this.props.form);
+    this.props.setForm(this.formRef);
   }
 
   getFormInstance = () => {
@@ -38,7 +38,7 @@ class AddForm extends Component {
     return (
       <Form ref={this.formRef}>
         <Form.Item name="parentId">
-          <Select options={[{ value: "sample", label: <span>sample</span> }]} />
+          <Select options={[{ value: "0", label: <span>1级目录</span> }]} />
         </Form.Item>
 
         <Form.Item name="categoryName">
