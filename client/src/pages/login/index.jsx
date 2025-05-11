@@ -7,6 +7,7 @@ import { reqLogin } from "../../api";
 import { Navigate, useNavigate } from "react-router-dom";
 import memoryUtils from "../../utils/memoryUtils";
 import storageUtils from "../../utils/storageUtils";
+const USER_KEY = "user_key";
 
 function Login() {
   const [userName, setUserName] = useState("admin");
@@ -57,7 +58,12 @@ function Login() {
   };
 
   // 如果用户已经登陆, 自动跳转到管理界面  to <home/>
-  const user = memoryUtils.user;
+  let user = memoryUtils.user;
+  if (!user._id) {
+   // user = storageUtils.getUser();
+   user = JSON.parse(localStorage.getItem(USER_KEY) || '{}' )
+  }
+  console.log(user);
   if (user && user._id) {
     // or navigate("/");
     return <Navigate to="/" />;
@@ -80,6 +86,7 @@ function Login() {
             onChange={handleInputChange}
             type="text"
             placeholder="your username here"
+            autoComplete="username"
           />
           <label htmlFor="password" className="passwordLabel">
             password
@@ -92,6 +99,7 @@ function Login() {
             onChange={handleInputChange}
             type="password"
             placeholder="your password here"
+            autoComplete="current-password"
           />
           <button onClick={handleFormSubmit} className="submit">
             Login

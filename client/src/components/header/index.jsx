@@ -9,7 +9,7 @@ import {formateDate} from '../../utils/dateUtils'
 import memoryUtils from '../../utils/memoryUtils'
 import storageUtils from '../../utils/storageUtils'
 import './index.less'
-
+import { useNavigate } from 'react-router-dom';
 /*
 左侧导航的组件
  */
@@ -73,7 +73,9 @@ class Header extends Component {
         console.log("onOK:props")
         console.log(this.props)
         // 跳转到login
-        this.props.location.replace('/login')
+        // router v5 syntax
+        // this.props.history.replace("/")
+        this.props.navigate('/login', { replace: true });
       }
     })
   }

@@ -12,12 +12,20 @@ import LeftNav from "../components/left-nav/index";
 import Header from "../components/header/index";
 import Category from "../pages/category/category";
 import Admin from "./login/index";
-import memoryUtils from '../utils/memoryUtils'
+import memoryUtils from "../utils/memoryUtils";
+import storageUtils from "../utils/storageUtils";
+const USER_KEY = "user_key";
 
 // all the routes here instead of main/app routing
 export default function Home() {
-  const user = memoryUtils.user;
-  console.log("memoryutils.user: ");
+   let user = memoryUtils.user;
+   if (!user._id) {
+    // user = storageUtils.getUser();
+    user = JSON.parse(localStorage.getItem(USER_KEY) || '{}' )
+   }
+  
+  console.log("user object: ");
+  // return function itself?
   console.log(user);
   // 如果内存没有存储user ==> 当前没有登陆
   if (!user || !user._id) {
